@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contact-form-inner.kyc-popup-wrapper.contact-form-inner.kyc-popup-wrapper {
+            display: block;
+            position: fixed;
+            z-index: 9;
+            background-color: aquamarine;
+            width: 100%;
+        }
+
+        .contact-form-inner.kyc-popup-wrapper.contact-form-inner.kyc-popup-wrapper.hidden {
+            display: none;
+        }
+
+        .form-overlay.hidden {
+            display: block;
+        }
+
+        .form-overlay.hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="kyc-popup-btn">Click me</button>
+
+    <div class="contact-form-inner kyc-popup-wrapper hidden">
+        <form action="process_form.php" method="post">
+            <div class="row">
+                <div class="col-lg-6 col-12">
+                    <input type="text" placeholder="Name">
+                </div>
+                <div class="col-lg-6 col-12">
+                    <input type="text" placeholder="Phone">
+                </div>
+                <div class="col-lg-6 col-12">
+                    <input type="email" placeholder="Email">
+                </div>
+                <div class="col-lg-6 col-12">
+                    <input type="text" placeholder="How can help you?">
+                </div>
+                <div class="col-12">
+                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Your message"></textarea>
+                </div>
+                <input type="submit" value="Send a Message">
+            </div>
+        </form>
+        <button class="close-btn">Close</button>
+    </div>
+    <div class="form-overlay hidden"
+        style="width: 100%; height:100%; background-color:rgba(0, 0, 0, 0.5); position:fixed; top:0; left:0;">
+    </div>
+
+    <script>
+        const kycPopupBtn = document.getElementById('kyc-popup-btn');
+        const kycPopupWrapper = document.querySelector('.kyc-popup-wrapper');
+        const formOverlay = document.querySelector('.form-overlay');
+        const closeBtn = document.querySelector('.close-btn');
+
+        function toggleHiddenClass() {
+            kycPopupWrapper.classList.toggle('hidden');
+        }
+
+        function toggleHiddenClassOverlay() {
+            formOverlay.classList.toggle('hidden');
+        }
+
+        kycPopupBtn.addEventListener('click', toggleHiddenClass);
+        kycPopupBtn.addEventListener('click', toggleHiddenClassOverlay);
+        closeBtn.addEventListener('click', toggleHiddenClass);
+        closeBtn.addEventListener('click', toggleHiddenClassOverlay);
+        formOverlay.addEventListener('click', toggleHiddenClass);
+        formOverlay.addEventListener('click', toggleHiddenClassOverlay);
+
+        document.addEventListener("keydown", function (event) {
+            if (event.keyCode === 27) {
+                kycPopupWrapper.classList.add('hidden');
+                formOverlay.classList.add('hidden');   
+            }
+        });
+    </script>
+
+</body>
+
+</html>
